@@ -11,6 +11,7 @@ import setupGUI               from "./modules/utils/GUI"
 import createSphere           from "./modules/Objects/Sphere"
 import createCube             from "./modules/Objects/Cube"
 import createDeck             from "./modules/Objects/Deck"
+import createTruck            from "./modules/Objects/Truck"
 
 // --------------------
 
@@ -28,6 +29,8 @@ const controls = createControls(camera, renderer)
 // Lights
 const directionalLight = createDirectionalLight()
 scene.add(directionalLight)
+const ambienLight = createAmbientLight()
+scene.add(ambienLight)
 
 // Geometry 
 const groundPlane = createPlane()
@@ -39,6 +42,8 @@ const sphere      = createSphere()
 const cube        = createCube()
 //scene.add(cube)
 
+const truck = createTruck()
+scene.add(truck)
 const deck = createDeck()
 scene.add(deck)
 
