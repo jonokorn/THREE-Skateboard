@@ -25,11 +25,13 @@ const controls = createControls(camera, renderer)
 //  --------------------
 
 // Lights
-const directionalLight = createDirectionalLight()
-const helper           = new THREE.DirectionalLightHelper(directionalLight, 5)
+const directionalLight1 = createDirectionalLight(10,10,10)
+const directionalLight2 = createDirectionalLight(0,2,7)
+const helper           = new THREE.DirectionalLightHelper(directionalLight1, 5)
 const ambienLight      = createAmbientLight()
 scene.add(ambienLight)
-scene.add(directionalLight)
+scene.add(directionalLight1)
+scene.add(directionalLight2)
 //scene.add(helper)
 
 // Geometry 
@@ -71,13 +73,14 @@ wheel4.position.set(0, 0.7, -2)
 
 function setup() {
     setupGUI({
-        directionalLight : directionalLight,
+        directionalLight : directionalLight1,
         groundPlane      : groundPlane,
         deck             : deck
     })
     camera.position.set(0,2,7)
     controls.update()
 }
+
 
 function animate() {
 

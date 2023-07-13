@@ -7,8 +7,9 @@ export default function createTruck () {
     // --- 
     
     const material = new MeshStandardMaterial({
-        color : "rgb(255,255,255)",
-        roughness : 1,
+        color : 0xffffff,
+        emissive : 0x000000,
+        roughness : 0.0,
         metalness : 1.0, 
         wireframe : false
     })
@@ -45,6 +46,9 @@ export default function createTruck () {
     bolt2.rotation.x = -0.5 * Math.PI
     bolt1.position.y = 6
     bolt2.position.y = -6
+
+
+    
     // Truck Group
     const truck = new Group()
     
@@ -61,5 +65,6 @@ export default function createTruck () {
     truck.scale.set(0.4, 0.4, 0.4)
 
     // ---
+
     return truck
 }

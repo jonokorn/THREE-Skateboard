@@ -1,4 +1,4 @@
-import { BoxGeometry, MeshStandardMaterial, Mesh, CylinderGeometry, Group, TextureLoader, BackSide, FrontSide, DoubleSide } from 'three'
+import { BoxGeometry, MeshStandardMaterial, Mesh, CylinderGeometry, Group, TextureLoader, RepeatWrapping } from 'three'
 
 export default function createDeck () {
 
@@ -11,37 +11,39 @@ export default function createDeck () {
     const deckDepth  = 0.08
 
     // --- 
+    const textureLoader   = new TextureLoader()
+    const woodTexture     = textureLoader.load("../../../assets/woodTexture.png")
+    const gripTapeTexture = textureLoader.load("../../../assets/gripTapeTexture.png")
+    gripTapeTexture.wrapS = RepeatWrapping
+    gripTapeTexture.wrapT = RepeatWrapping    
 
-    const uvTexture = new TextureLoader().load("../../../assets/woodTexture.png")
-    
-    // GripTape Material 
-    const gripTape = new MeshStandardMaterial({
-        color     : "rgb(100,100,100)",
-        roughness : 0.9,
-        metalness : 0.1,
-        wireframe : false,
+    //Materials
+    const gtm = new MeshStandardMaterial({ //gm = gripTapeMaterial
+        map : gripTapeTexture,
+        wrapS : RepeatWrapping,
+        wrapT : RepeatWrapping
     })
 
-    const texture = new MeshStandardMaterial({
-        map : uvTexture
+    const wm = new MeshStandardMaterial({ // wm = woodMaterial
+        map : woodTexture
     })
 
     // Center Part
     const centerGeometry = new BoxGeometry(deckWidth, deckHeight, deckDepth, 1, 1, 1)
-    const center         = new Mesh(centerGeometry, [gripTape, gripTape, gripTape, gripTape, gripTape, texture])
+    const center         = new Mesh(centerGeometry, [gtm, gtm, gtm, gtm, gtm, wm])
     components.push(center)
 
     // Nose & Tail
     const tipGeometry = new CylinderGeometry(1, 1, 0.1, 15, 5, false, 0, 3.1)
 
-    const nose         = new Mesh(tipGeometry, [gripTape, texture, gripTape, gripTape, gripTape, gripTape])
+    const nose         = new Mesh(tipGeometry, [gtm, wm, gtm, gtm, gtm, gtm])
     nose.rotation.x    = -0.5 * Math.PI
     nose.rotation.y    = -0.5 * Math.PI
     nose.rotation.z    = -0.075 * Math.PI
     nose.position.set(0,2.9,0)
     components.push(nose)
 
-    const tail         = new Mesh(tipGeometry, [gripTape, gripTape, texture, gripTape, gripTape, gripTape])
+    const tail         = new Mesh(tipGeometry, [gtm, gtm, wm, gtm, gtm, gtm])
     tail.rotation.x    = -0.5 * Math.PI
     tail.rotation.y    = -0.5 * Math.PI
     tail.rotation.z    = 1.075 * Math.PI
