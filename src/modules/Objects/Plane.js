@@ -1,12 +1,27 @@
-import { PlaneGeometry, MeshStandardMaterial, Mesh } from 'three'
+import { PlaneGeometry, MeshStandardMaterial, Mesh, TextureLoader } from 'three'
 
 export default function createPlane () {
 
-    const geometry = new PlaneGeometry(10,10)
-    const material = new MeshStandardMaterial({color : 0xFFFFFF})
-    const plane    = new Mesh(geometry, material)
+    const textureLoader = new TextureLoader()
+    const geometry      = new PlaneGeometry(20,20)
 
-    plane.rotation.x = -0.5 * Math.PI
+    const texture       = textureLoader.load("../../../assets/concreteTexture.png")
+    const normalMap     = textureLoader.load("../../../assets/concreteNormalMap.jpeg")
 
+    const material      = new MeshStandardMaterial({
+        //map       : texture,
+        color : "rgb(190,190,190)",
+        normalMap : normalMap
+    })
+    const plane         = new Mesh(geometry, material)
+
+    // --- 
+
+    plane.rotation.x    = -0.5 * Math.PI
+    plane.receiveShadow = true
+    plane.castShadow    = true
+
+    // --- 
+    
     return plane
 }
