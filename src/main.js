@@ -10,6 +10,7 @@ import setupGUI               from "./modules/utils/GUI"
 import createDeck             from "./modules/Objects/Deck"
 import createTruck            from "./modules/Objects/Truck"
 import createWheel            from "./modules/Objects/Wheel"
+import setupHelpers from "./modules/utils/Helpers"
 
 // --------------------
 
@@ -27,12 +28,12 @@ const controls = createControls(camera, renderer)
 // Lights
 const directionalLight1 = createDirectionalLight(10,10,10)
 const directionalLight2 = createDirectionalLight(0,2,7)
-const helper           = new THREE.DirectionalLightHelper(directionalLight1, 5)
-const ambienLight      = createAmbientLight()
+const directionalLight3 = createDirectionalLight(0,2,-7)
+const ambienLight       = createAmbientLight()
 scene.add(ambienLight)
 scene.add(directionalLight1)
 scene.add(directionalLight2)
-//scene.add(helper)
+scene.add(directionalLight3)
 
 // Geometry 
 const groundPlane = createPlane()
@@ -41,7 +42,7 @@ scene.add(groundPlane)
 const deck = createDeck()
 scene.add(deck)
 deck.position.y = 0.6
-deck.animate = true
+deck.animate = false
 
 // Trucks
 const truck1 = createTruck()
@@ -73,10 +74,15 @@ wheel4.position.set(0, 0.7, -2)
 // --- 
 
 function setup() {
+
+    //setupHelpers(scene)
+
     setupGUI({
         directionalLight : directionalLight1,
         groundPlane      : groundPlane,
-        deck             : deck
+        deck             : deck,
+        scene            : scene,
+        setupHelpers     : setupHelpers
     })
     camera.position.set(0,2,5)
     controls.update()
