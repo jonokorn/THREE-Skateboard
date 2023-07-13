@@ -41,6 +41,7 @@ scene.add(groundPlane)
 const deck = createDeck()
 scene.add(deck)
 deck.position.y = 0.6
+deck.animate = true
 
 // Trucks
 const truck1 = createTruck()
@@ -77,7 +78,7 @@ function setup() {
         groundPlane      : groundPlane,
         deck             : deck
     })
-    camera.position.set(0,2,7)
+    camera.position.set(0,2,5)
     controls.update()
 }
 
@@ -88,7 +89,6 @@ function animate() {
 
     if(deck.animate){
         deck.rotation.x += 0.0125
-        console.log(deck.rotation.x)
     }
 }
 

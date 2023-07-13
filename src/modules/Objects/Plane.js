@@ -20,6 +20,7 @@ export default function createPlane () {
     plane.rotation.x    = -0.5 * Math.PI
     plane.receiveShadow = true
     plane.castShadow    = true
+    plane.visible       = false
 
     // --- 
     

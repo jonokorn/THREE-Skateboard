@@ -1,5 +1,6 @@
 import * as dat   from 'dat.gui'
 import * as THREE from "three"
+import { convertArray } from 'three/src/animation/AnimationUtils'
 // ---------
 
 export default function setupGUI (objects) {
@@ -9,7 +10,7 @@ export default function setupGUI (objects) {
     const options = {
         directionalLightColor : "rgb(255,255,255)",
         showGroundPlane       : true,
-        rotateBoard           : false,
+        rotateBoard           : true,
     }
 
     gui.addColor(options, "directionalLightColor").onChange(e =>
@@ -29,5 +30,4 @@ export default function setupGUI (objects) {
         console.log("360 FLip")
 
     }}, "performTreFlip")
-
 }

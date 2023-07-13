@@ -14,14 +14,15 @@ export default function createDeck () {
     const textureLoader   = new TextureLoader()
     const woodTexture     = textureLoader.load("../../../assets/woodTexture.png")
     const gripTapeTexture = textureLoader.load("../../../assets/gripTapeTexture.png")
+    const normalMap       = textureLoader.load("../../../assets/sandPaperNormalMap.png")
     gripTapeTexture.wrapS = RepeatWrapping
     gripTapeTexture.wrapT = RepeatWrapping    
 
     //Materials
     const gtm = new MeshStandardMaterial({ //gm = gripTapeMaterial
-        map : gripTapeTexture,
-        wrapS : RepeatWrapping,
-        wrapT : RepeatWrapping
+        //map : gripTapeTexture,
+        color : 0x000000,
+        normalMap : normalMap
     })
 
     const wm = new MeshStandardMaterial({ // wm = woodMaterial
@@ -30,20 +31,20 @@ export default function createDeck () {
 
     // Center Part
     const centerGeometry = new BoxGeometry(deckWidth, deckHeight, deckDepth, 1, 1, 1)
-    const center         = new Mesh(centerGeometry, [gtm, gtm, gtm, gtm, gtm, wm])
+    const center         = new Mesh(centerGeometry, [wm, wm, wm, wm, gtm, wm])
     components.push(center)
 
     // Nose & Tail
     const tipGeometry = new CylinderGeometry(1, 1, 0.1, 15, 5, false, 0, 3.1)
 
-    const nose         = new Mesh(tipGeometry, [gtm, wm, gtm, gtm, gtm, gtm])
+    const nose         = new Mesh(tipGeometry, [wm, wm, gtm, gtm, gtm, gtm])
     nose.rotation.x    = -0.5 * Math.PI
     nose.rotation.y    = -0.5 * Math.PI
     nose.rotation.z    = -0.075 * Math.PI
     nose.position.set(0,2.9,0)
     components.push(nose)
 
-    const tail         = new Mesh(tipGeometry, [gtm, gtm, wm, gtm, gtm, gtm])
+    const tail         = new Mesh(tipGeometry, [wm, gtm, wm, gtm, gtm, gtm])
     tail.rotation.x    = -0.5 * Math.PI
     tail.rotation.y    = -0.5 * Math.PI
     tail.rotation.z    = 1.075 * Math.PI
