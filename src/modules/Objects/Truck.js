@@ -47,8 +47,31 @@ export default function createTruck () {
     bolt1.position.y = 6
     bolt2.position.y = -6
 
+    // Screws
+    const screwGeometry = new CylinderGeometry(6, 6, 5, 16)
+    const screw1        = new Mesh(screwGeometry, material)
+    screw1.scale.set(0.02, 0.02, 0.02)
+    screw1.position.y   = -0.20
+    screw1.position.z   = 0.75
+    screw1.position.x   = 0.75
 
-    
+    const screw2        = screw1.clone()
+    screw2.position.z   = 0.75
+    screw2.position.x   = -0.75
+
+    const screw3        = screw1.clone()
+    screw3.position.z   = -0.75
+    screw3.position.x   = -0.75
+
+    const screw4        = screw1.clone()
+    screw4.position.z   = -0.75
+    screw4.position.x   = 0.75
+    components.push(screw1)
+    components.push(screw2)
+    components.push(screw3)
+    components.push(screw4)
+
+
     // Truck Group
     const truck = new Group()
     
