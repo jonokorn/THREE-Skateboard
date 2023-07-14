@@ -7,8 +7,8 @@ export default function createTruck () {
     // --- 
     
     const material = new MeshStandardMaterial({
-        color : 0xffffff,
-        emissive : 0x000000,
+        color     : 0xffffff,
+        emissive  : 0x000000,
         roughness : 0.0,
         metalness : 1.0, 
         wireframe : false

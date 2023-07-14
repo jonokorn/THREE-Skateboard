@@ -9,8 +9,7 @@ export default function createPlane () {
     const normalMap     = textureLoader.load("../../../assets/concreteNormalMap.jpeg")
 
     const material      = new MeshStandardMaterial({
-        //map       : texture,
-        color : "rgb(190,190,190)",
+        color     : "rgb(190,190,190)",
         normalMap : normalMap
     })
     const plane         = new Mesh(geometry, material)
